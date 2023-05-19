@@ -1,10 +1,10 @@
-FROM eclipse-temurin:17-jre-jammy AS builder
+FROM eclipse-temurin:17-jre-alpine AS builder
 
 ARG DOWNLOAD_URL
 
 WORKDIR /data
 
-RUN apt-get update && apt-get -y install wget
+RUN apk add --no-cache wget
 
 RUN wget -P /opt/papermc/ $DOWNLOAD_URL && \
     java -jar /opt/papermc/paper-*.jar
@@ -13,7 +13,7 @@ RUN wget -P /opt/papermc/ $DOWNLOAD_URL && \
 RUN sed -i 's/false/true/g' eula.txt && \
     rm -R logs/
 
-FROM eclipse-temurin:17-jre-jammy
+FROM eclipse-temurin:17-jre-alpine
 
 LABEL org.opencontainers.image.vendor="Dockcenter"
 LABEL org.opencontainers.image.title="PaperMC"
@@ -27,7 +27,7 @@ ENV JAVA_FLAGS="-XX:+UseStringDeduplication -XX:+UseG1GC -XX:+ParallelRefProcEna
 
 WORKDIR /data
 
-RUN apt-get update && apt-get -y install openssl && \
+RUN apk add --upgrade --no-cache openssl && \
     addgroup -S paper && \
     adduser -S paper -G paper && \
     chown paper:paper /data
