@@ -54,7 +54,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
+          tags: ghcr.io/bootdns/bootdns-agent:${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           build-args: |
             DOWNLOAD_URL=${{ inputs.downloadURL }}
