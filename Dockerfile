@@ -4,7 +4,7 @@ ARG DOWNLOAD_URL
 
 WORKDIR /data
 
-RUN apt-get -y install wget
+RUN apt-get update && apt-get -y install wget
 
 RUN wget -P /opt/papermc/ $DOWNLOAD_URL && \
     java -jar /opt/papermc/paper-*.jar
@@ -27,7 +27,7 @@ ENV JAVA_FLAGS="-XX:+UseStringDeduplication -XX:+UseG1GC -XX:+ParallelRefProcEna
 
 WORKDIR /data
 
-RUN apt-get -y install openssl && \
+RUN apt-get update && apt-get -y install openssl && \
     addgroup -S paper && \
     adduser -S paper -G paper && \
     chown paper:paper /data
