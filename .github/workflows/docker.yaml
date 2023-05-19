@@ -45,7 +45,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v4
         with:
-          images: cronick/paper
+          images: ghcr.io/cronick/paper
           tags: ${{ inputs.tags }}
 
       - name: Build and push Docker image
@@ -54,8 +54,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: |
-            ghcr.io/cronick/paper:${{ fromJSON(steps.docker_meta.outputs.json).labels['org.opencontainers.image.version'] }}
+          tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           build-args: |
             DOWNLOAD_URL=${{ inputs.downloadURL }}
