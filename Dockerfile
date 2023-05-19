@@ -4,7 +4,7 @@ ARG DOWNLOAD_URL
 
 WORKDIR /data
 
-RUN apk add --no-cache wget
+RUN apt-get -y install wget
 
 RUN wget -P /opt/papermc/ $DOWNLOAD_URL && \
     java -jar /opt/papermc/paper-*.jar
