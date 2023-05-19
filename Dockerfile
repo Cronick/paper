@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre-alpine AS builder
+FROM eclipse-temurin:17-jre-jammy AS builder
 
 ARG DOWNLOAD_URL
 
