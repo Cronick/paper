@@ -13,7 +13,7 @@ RUN wget -P /opt/papermc/ $DOWNLOAD_URL && \
 RUN sed -i 's/false/true/g' eula.txt && \
     rm -R logs/
 
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:17-jre-jammy
 
 LABEL org.opencontainers.image.vendor="Dockcenter"
 LABEL org.opencontainers.image.title="PaperMC"
